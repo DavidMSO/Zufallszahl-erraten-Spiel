@@ -3,22 +3,33 @@ public class Spiel{
     int zahl;
     int ratezahl;
     int versuche;
-    public void start(){
-        zahl  = (int) (Math.random()*100)+1;
+    String highscore;
+    int steuerungszahl;
+    public Spiel(){
         Scanner input = new Scanner(System.in);
+        System.out.println("Wenn du das ultimative Ratespiel spielen möchtest, drücke gebe eine 1 ein wenn nicht eine 0 zum anzeigen des Highscores eine 2.");
+        System.out.println("Spiel starten:         1");
+        System.out.println("Programm beenden:      0");
+        System.out.println("Highscore anzeigen:    2");
+        steuerungszahl = input.nextInt();
+        if
+        
+        
+    }
+    public void start(){
+        Scanner input = new Scanner(System.in);
+        zahl  = (int) (Math.random()*100)+1;
         System.out.println("Willkommen zum Ultimativen Zahlen-Rate-Spiel! \nDie Ultimative super Zahl wurde soeben mit unserem hochtechnologischen Zufallsprinzip generiert und steht jetzt für dich zum Raten bereit. \nGebe eine Zahl ein um sie zu eraten"); 
-        while (ratezahl < zahl || ratezahl > zahl){
+        while (ratezahl != zahl){
             ratezahl = input.nextInt();
             versuche +=1;
-            if (ratezahl == zahl){
-                System.out.println("Das war die Richtige Zahl, nach nur " + versuche + " Versuchen.");
-            }
-            else if (ratezahl < zahl){
+            if (ratezahl < zahl){
                 System.out.println("Das ist leider nicht die Richtige Zahl, die Zahl ist größer.");
             }
-            else if (ratezahl > zahl){
+            else{
                 System.out.println("Das ist leider nicht die Richtige Zahl, die Zahl ist kleiner.");  
             }
         }
+        System.out.println("Das war die Richtige Zahl, nach nur " + versuche + " Versuchen.");
     }
 }
