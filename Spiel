@@ -3,23 +3,75 @@ public class Spiel{
     int zahl;
     int ratezahl;
     int versuche;
-    String highscore;
+    String highscoren;
+    int highscorez;
     int steuerungszahl;
+    int winningstreak;
+    int schwierigkeit;
     public Spiel(){
-        Scanner input = new Scanner(System.in);
+        menu();
+    }
+    public void menu(){
         System.out.println("Wenn du das ultimative Ratespiel spielen möchtest, drücke gebe eine 1 ein wenn nicht eine 0 zum anzeigen des Highscores eine 2.");
+        if (winningstreak>0){
+            System.out.println("Deine Winningstreak ist: " + winningstreak);
+        }
         System.out.println("Spiel starten:         1");
         System.out.println("Programm beenden:      0");
         System.out.println("Highscore anzeigen:    2");
-        steuerungszahl = input.nextInt();
-        if
-        
-        
+        steuerung(0);
+    }
+    public void steuerung(int a){
+        steuerungszahl = -1;
+        Scanner input = new Scanner(System.in);
+        if (a==1){
+            while (steuerungszahl<1||steuerungszahl>3){
+                steuerungszahl = input.nextInt();
+            }
+            if (steuerungszahl == 1){
+                zahl  = (int) (Math.random()*100)+1;
+                System.out.println("Schwierigkeitsgrad 1");
+            }
+            else if (steuerungszahl == 2){
+                zahl  = (int) (Math.random()*1000)+1;
+                System.out.println("Schwierigkeitsgrad 2");
+            }
+            else if (steuerungszahl == 3){
+                zahl  = (int) (Math.random()*10000)+1;
+                System.out.println("Schwierigkeitsgrad 3");
+            }
+        }
+        else if (a==0){
+            while (steuerungszahl<0||steuerungszahl>2){
+                steuerungszahl = input.nextInt();
+            }
+            if (steuerungszahl == 1){
+                System.out.println("Spiel wird gestartet...");
+                start();
+            }
+            else if (steuerungszahl == 0){
+                System.out.println("Programm wird beended...");
+                if (winningstreak > highscorez){
+                    System.out.println("Du hast einen neuen Highscore erreicht. Gib deinen Namen ein um ihn zu speichern.");
+                    highscoren = input.nextLine();
+                }
+                System.exit(0);
+            }
+            else if (steuerungszahl == 2){
+                System.out.println("Der aktuelle Highscore ist von "+highscoren+" und ist " + highscorez);
+                steuerung(0);
+            }
+        }
     }
     public void start(){
         Scanner input = new Scanner(System.in);
-        zahl  = (int) (Math.random()*100)+1;
-        System.out.println("Willkommen zum Ultimativen Zahlen-Rate-Spiel! \nDie Ultimative super Zahl wurde soeben mit unserem hochtechnologischen Zufallsprinzip generiert und steht jetzt für dich zum Raten bereit. \nGebe eine Zahl ein um sie zu eraten"); 
+        System.out.println("Wähle zunächst deine Schwierigkeitsstufe.");
+        System.out.println("1-100:   1");
+        System.out.println("1-1000:  2");
+        System.out.println("1-10000: 3");
+        steuerung(1);
+        System.out.println("Willkommen zum Ultimativen Zahlen-Rate-Spiel! \nDie Ultimative super Zahl wurde soeben mit unserem hochtechnologischen Zufallsprinzip generiert und steht jetzt für dich zum Raten bereit.");
+        System.out.println("Gebe eine Zahl ein um sie zu eraten");
         while (ratezahl != zahl){
             ratezahl = input.nextInt();
             versuche +=1;
@@ -31,5 +83,7 @@ public class Spiel{
             }
         }
         System.out.println("Das war die Richtige Zahl, nach nur " + versuche + " Versuchen.");
+        winningstreak += 1;
+        menu();
     }
 }
